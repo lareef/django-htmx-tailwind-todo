@@ -1,0 +1,44 @@
+<div id="docs">
+  <div class="w-4/5 my-6 mx-auto p-2 lg:p-10 bg-white rounded-xl">
+    <form class="flex mb-6 space-x-4">
+      <label class="master flex-1 px-4 py-3 bg-blue-200 rounded-xl">
+        {{ master}}
+      </label>
+      <input
+        type="text"
+        name="title"
+        class="title flex-1 px-4 py-3 bg-gray-200 rounded-xl"
+        placeholder="title"
+      />
+
+      <button
+        hx-post="{{ master }}/add-doc/"
+        hx-target="#doclist"
+        hx-swap="afterend"
+        class="p-3 rounded-xl text-white bg-cyan-500 hover:bg-cyan-600"
+      >
+        +
+      </button>
+      <button
+        hx-get="{% url 'masterscopy' %}"
+        class="p-3 rounded-xl text-white bg-red-500 hover:bg-red-600"
+        hx-target="#docs"
+      >
+        X
+      </button>
+    </form>
+    <div class="flex py-3 rounded-xl bg-gray-100">
+      <div class="w-4/5">
+        <p class="px-6 text-xs font-medium text-gray-500 uppercase">Title</p>
+      </div>
+
+      <div class="hidden md:block w-1/5 px-6 text-right">
+        <p class="text-xs font-medium text-gray-500 uppercase">Actions</p>
+      </div>
+    </div>
+
+    <div class="divide-y divide-gray-200" id="doclist">
+      {% for doc in docs %} {% include 'doc/partials/doc.html' %} {% endfor %}
+    </div>
+  </div>
+</div>

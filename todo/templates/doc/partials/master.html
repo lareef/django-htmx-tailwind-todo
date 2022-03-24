@@ -1,0 +1,35 @@
+<article class="flex{% if master.mname %} bg-green-50{% endif %}">
+  <div class="w-4/5 py-3">
+    <a
+      class="px-6 text-xs text-gray-900"
+      hx-get="{{ master.id }}/"
+      hx-target="#main"
+      hx-swap="outerHTML"
+    >
+      {{ master.mname }}
+    </a>
+  </div>
+
+  <div class="w-1/5 px-6 py-3 flex justify-end space-x-4">
+    {% if not master.mname %}
+    <form
+      hx-put="update_master/{{ master.id }}/"
+      hx-target="closest article"
+      hx-swap="outerHTML"
+    >
+      <button class="text-sky-600 hover:text-sky-900">Done</button>
+    </form>
+    {% endif %}
+
+    <a
+      href="#"
+      class="text-sky-600 hover:text-sky-900"
+      hx-confirm="Are you sure?"
+      hx-target="closest article"
+      hx-swap="outerHTML swap:1s"
+      hx-delete="delete_master/{{ master.id }}/"
+    >
+      Delete
+    </a>
+  </div>
+</article>
