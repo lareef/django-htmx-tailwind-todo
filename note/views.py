@@ -79,9 +79,12 @@ def edit_noteitem(request, pk, noteref):
         noteitem.product=Product.objects.get(product_name=product)
         noteitem.quantity = request.POST.get('quantity', '')
         noteitem.cost = request.POST.get('cost', '')
+        noteitem.weight = request.POST.get('weight', '')
         noteitem.save()
+        
+        note = Note.objects.filter(notekey_id=notekey)[:1].get()
 
-        return render(request, 'note/partials/noteitem.html', {'noteref': noteref, 'noteitem': noteitem})
+        return render(request, 'note/partials/noteitem.html', {'noteref': noteref, 'noteitem': noteitem, 'note': note})
     
     return render(request, 'note/partials/edit_noteitem.html', {'noteref': noteref, 'noteitem': noteitem})
 
@@ -91,6 +94,7 @@ def add_noteitem(request, noteref):
     product = request.POST.get('product', '')
     quantity = request.POST.get('quantity', '')
     cost = request.POST.get('cost', '')
+    weight = request.POST.get('weight', '')
 
     if noteref:
         obj_note = Notekey.objects.get(notekey=noteref)
@@ -103,6 +107,7 @@ def add_noteitem(request, noteref):
                 notekey=obj_note,
                 product=obj_product,
                 quantity=quantity,
+                weight=weight,
                 cost=cost)
             
             noteitem = Noteitem.objects.get(id=obj_poitem.noteitem_ptr_id)

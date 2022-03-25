@@ -48,9 +48,11 @@ class Noteitem(models.Model):
     notekey = models.ForeignKey(Notekey, on_delete=models.CASCADE, related_name="%(class)s")
     noteitemkey = models.ForeignKey(Noteitemkey, on_delete=models.CASCADE, related_name="%(class)s")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
-    quantity = models.DecimalField(max_digits=6, decimal_places=2)
+    weight = models.DecimalField(max_digits=6, decimal_places=2)
+    quantity = models.PositiveSmallIntegerField()
     cost = models.DecimalField(max_digits=6, decimal_places=2)
     is_final = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
     
     objects = InheritanceManager()
     
