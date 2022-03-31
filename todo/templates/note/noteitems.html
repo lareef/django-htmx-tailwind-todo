@@ -2,7 +2,7 @@
   <div class="w-4/5 my-6 mx-auto p-2 lg:p-10 bg-white rounded-xl">
     <form class="flex mb-6 space-x-4">
       <label class="note flex-1 px-4 py-3 bg-blue-200 rounded-xl">
-        {{ noteref }}
+        {{ note.notekey }}
       </label>
       <input
         list="product"
@@ -40,7 +40,7 @@
       />
       {% if note.status_id == 0 %}
       <button
-        hx-post="{% url 'note:add_noteitem' noteref %}"
+        hx-post="{% url 'note:add_noteitem' note.id %}"
         hx-target="#noteitemlist"
         hx-swap="afterend"
         class="p-3 rounded-xl text-white bg-cyan-500 hover:bg-cyan-600"

@@ -22,14 +22,14 @@ class Status(models.Model):
 class Note(models.Model):
     notekey = models.ForeignKey(Notekey, on_delete=models.CASCADE, related_name="%(class)s")
     created_on = models.DateTimeField(auto_now_add=True)
-    notetype = models.ForeignKey(Notetype, on_delete=models.CASCADE, related_name="notetypes")
+    notetype = models.ForeignKey(Notetype, on_delete=models.CASCADE, related_name="%(class)s")
     is_final = models.BooleanField(default=False)
     status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name="statuses", default=0)
 
     objects = InheritanceManager()
     
     def __int__(self):
-        return self.notekey
+        return self.id
 
 class Noteitemkey(models.Model):
     notekey = models.ForeignKey(Notekey, on_delete=models.CASCADE, related_name='notekeys')
@@ -47,6 +47,7 @@ class Product(models.Model):
 class Noteitem(models.Model):
     notekey = models.ForeignKey(Notekey, on_delete=models.CASCADE, related_name="%(class)s")
     noteitemkey = models.ForeignKey(Noteitemkey, on_delete=models.CASCADE, related_name="%(class)s")
+    notetypekey = models.ForeignKey(Notetype, on_delete=models.CASCADE, related_name="notetypes")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
     weight = models.DecimalField(max_digits=6, decimal_places=2)
     quantity = models.PositiveSmallIntegerField()
@@ -72,6 +73,18 @@ class PO(Note):
         return self.notekey
       
 class POItem(Noteitem):
+    typ = models.CharField(max_length=10)
+    
+    def __int__(self):
+        return self.noteitemkey
+
+class SO(Note):
+    typ = models.CharField(max_length=10)
+
+    def __int__(self):
+        return self.notekey
+      
+class SOItem(Noteitem):
     typ = models.CharField(max_length=10)
     
     def __int__(self):

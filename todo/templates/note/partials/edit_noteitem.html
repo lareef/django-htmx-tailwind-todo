@@ -1,5 +1,5 @@
 <form
-  hx-post="{{ noteref }}/edit_noteitem/{{ noteitem.id }}/"
+  hx-post="edit_noteitem/{{ noteitem.id }}/"
   hx-target="closest article"
   hx-swap="outerHTML"
   class="flex"
@@ -37,5 +37,5 @@
         value="{{ noteitem.weight }}"
         placeholder="weight"
       />
-  <button class="text-sky-600 hover:text-sky-900">Save</button>
+  <button class="flex-1 text-sky-600 hover:text-sky-900">Save</button>
 </form>

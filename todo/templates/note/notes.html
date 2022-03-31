@@ -22,30 +22,41 @@
       <a href="/" class="text-2xl text-white">NOTE</a>
     </nav>
 
-    <div class="w-4/5 my-6 mx-auto p-2 lg:p-10 bg-white rounded-xl" id="main">
+    <div id="main" class="w-4/5 my-6 mx-auto p-2 lg:p-10 bg-white rounded-xl" >
       <form
         class="flex mb-6 space-x-4"
         hx-post="{% url 'note:add_note' %}"
         hx-target="#notes"
         hx-swap="afterend"
       >
-        <input
+        {% comment %}<input
           list="notetype"
+           hx-get="{% url 'note:notes' notetypes %}" 
+          hx-get="notes/{{ notetype.vlaue }}"
+          hx-trigger="changed"
+          hx-target="#main"
+          hx-swap="outerHTML"
           name="notetype"
           class="note flex-1 px-4 py-3 bg-gray-200 rounded-xl"
           placeholder="Note Type"
-        />
+        />{% endcomment %}
+        <select
+        id="notetypelist" name="notetype" placeholder="NoteType" class="note flex-1 px-4 py-3 bg-gray-200 rounded-xl"
+          hx-get="notes{{ notetype.id }}/"
+          hx-trigger="change"
+          hx-target="#notes"
+          hx-swap="outerHTML"/>
+          <option value="">Note Type</option>
+        {% for notetype in notetypes %}
+          <option value="{{ notetype.id}}">{{ notetype }}</option>
+        {% endfor %}
+        </select>
         <input
           type="text"
           name="notekey"
           class="title flex-1 px-4 py-3 bg-gray-200 rounded-xl"
           placeholder="Note #"
         />
-        <datalist id="notetype">
-          <option value="Purchase Order"/>
-          <option value="Sales"/>
-          <option value="Customer Order"/>
-        </datalist>
         <button class="p-3 rounded-xl text-white bg-cyan-500 hover:bg-cyan-600">
           +
         </button>
@@ -62,8 +73,7 @@
       </div>
 
       <div class="divide-y divide-gray-200" id="notes">
-        {% for note in notes %} {% include 'note/partials/note.html' %} 
-        {% endfor %}
+        {% for note in notes %} {% include 'note/partials/note.html' %} {%endfor %}
       </div>
     </div>
   </body>
