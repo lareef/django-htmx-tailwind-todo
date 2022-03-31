@@ -4,22 +4,18 @@
       <label class="note flex-1 px-4 py-3 bg-blue-200 rounded-xl">
         {{ note.notekey }}
       </label>
+        <datalist id="product">
+        <option value="">Product</option>
+          {% for product in products %}
+            <option value="{{ product.product_name}}"></option>
+          {% endfor %}
+        </datalist>
       <input
         list="product"
         name="product"
         class="title flex-1 px-4 py-3 bg-gray-200 rounded-xl"
         placeholder="product"
       />
-{% comment %}         <datalist id="product">
-          <option value=1>Bangle"</option>
-          <option value=2>Ring"</option>
-          <option value=3>Chain"</option>
-        </datalist> {% endcomment %}
-         <datalist id="product">
-          <option value="Bangle"/>
-          <option value="Ring"/>
-          <option value="Chain"/>
-        </datalist>
       <input
         type="text"
         name="quantity"

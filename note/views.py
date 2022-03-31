@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
-from .models import Note, Noteitem, Notekey, Notetype, Status, Noteitemkey, PO, POItem, Product, SO, SOItem
+from .models import Note, Noteitem, Notekey, Notetype, Status, Noteitemkey, PO, POItem, Product, SO, SOItem, CO, COItem, WO, WOItem
 
 # def notes(request, pk=""):
 #     notetype = Notetype.objects.all()
@@ -20,14 +20,14 @@ def notes(request):
         notetype = request.GET.get('notetype', '')
         if notetype:
             notes = Note.objects.filter(notetype_id=notetype)
-        return render(request, 'note/notes-copy.html', {'notes': notes, 'notetypes': notetypes})
-    return render(request, 'note/notes.html', {'notes': notes, 'notetypes': notetypes})
+        return render(request, 'note/notes.html', {'notes': notes, 'notetypes': notetypes})
+    return render(request, 'note/init.html', {'notes': notes, 'notetypes': notetypes})
 
 def init(request):
     notetypes = Notetype.objects.all()
     #pk = request.POST.get('notetype', '')
     notes = None
-    return render(request, 'note/notes.html', {'notes': notes, 'notetypes': notetypes})
+    return render(request, 'note/init.html', {'notes': notes, 'notetypes': notetypes})
 
 @require_http_methods(['POST'])
 def add_note(request):
@@ -47,6 +47,14 @@ def add_note(request):
         if obj_notetype.id == 2:
             obj_so, create_so = SO.objects.get_or_create(notekey=obj_notekey, notetype=obj_notetype, typ=obj_notetype.id)
             obj_note = Note.objects.get(id=obj_so.note_ptr_id)
+
+        if obj_notetype.id == 3:
+            obj_co, create_po = CO.objects.get_or_create(notekey=obj_notekey, notetype=obj_notetype, typ=obj_notetype.id)
+            obj_note = Note.objects.get(id=obj_co.note_ptr_id)
+
+        if obj_notetype.id == 4:
+            obj_wo, create_so = WO.objects.get_or_create(notekey=obj_notekey, notetype=obj_notetype, typ=obj_notetype.id)
+            obj_note = Note.objects.get(id=obj_wo.note_ptr_id)
         
         #obj_notekey, create_notekey = Notekey.objects.get_or_update(notekey=obj_notekey, notetype=obj_notetype)
 
@@ -89,11 +97,12 @@ def delete_note(request, pk):
 def noteitems(request, pk):
     #notekey = Notekey.objects.get(notekey=noteref)
     note = Note.objects.get(id=pk)
+    products = Product.objects.all()
     noteref = note.notekey_id
     noteitems = Noteitem.objects.filter(notekey_id=noteref, notetypekey_id=note.notetype_id)
     #note = Note.objects.filter(notekey_id=notekey)[:1].get()
 
-    return render(request, 'note/noteitems.html', {'noteref': noteref, 'noteitems': noteitems, 'note': note})
+    return render(request, 'note/noteitems.html', {'noteref': noteref, 'noteitems': noteitems, 'note': note, 'products': products})
 
 @require_http_methods(['GET', 'POST'])
 def edit_noteitem(request, pk):
@@ -141,6 +150,24 @@ def add_noteitem(request, note):
                     cost=cost)
             if note.notetype_id == 2:
                 obj_item, create_poitem = SOItem.objects.get_or_create(
+                    noteitemkey=obj_noteitemkey,
+                    notekey=obj_notekey,
+                    product=obj_product,
+                    notetypekey=obj_notetype,
+                    quantity=quantity,
+                    weight=weight,
+                    cost=cost)
+            if note.notetype_id == 3:
+                obj_item, create_poitem = COItem.objects.get_or_create(
+                    noteitemkey=obj_noteitemkey,
+                    notekey=obj_notekey,
+                    notetypekey=obj_notetype,
+                    product=obj_product,
+                    quantity=quantity,
+                    weight=weight,
+                    cost=cost)
+            if note.notetype_id == 4:
+                obj_item, create_poitem = WOItem.objects.get_or_create(
                     noteitemkey=obj_noteitemkey,
                     notekey=obj_notekey,
                     product=obj_product,

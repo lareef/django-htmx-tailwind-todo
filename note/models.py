@@ -89,4 +89,27 @@ class SOItem(Noteitem):
     
     def __int__(self):
         return self.noteitemkey
+
+class CO(Note):
+    typ = models.CharField(max_length=10)
+
+    def __int__(self):
+        return self.notekey
+      
+class COItem(Noteitem):
+    typ = models.CharField(max_length=10)
     
+    def __int__(self):
+        return self.noteitemkey
+
+class WO(Note):
+    typ = models.CharField(max_length=10)
+
+    def __int__(self):
+        return self.notekey
+      
+class WOItem(Noteitem):
+    typ = models.CharField(max_length=10)
+    
+    def __int__(self):
+        return self.noteitemkey    
