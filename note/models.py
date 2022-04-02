@@ -1,3 +1,4 @@
+from itertools import product
 from django.db import models
 from model_utils.managers import InheritanceManager
 
@@ -112,4 +113,30 @@ class WOItem(Noteitem):
     typ = models.CharField(max_length=10)
     
     def __int__(self):
-        return self.noteitemkey    
+        return self.noteitemkey
+
+class Inv(models.Model):
+    item = models.CharField(max_length=20, default=0)
+    product = models.ForeignKey(Product, related_name='%(class)s', on_delete=models.CASCADE)
+    weight = models.DecimalField(max_digits=6, decimal_places=2)
+    
+    def __int__(self):
+        return self.id
+    
+class Invitem(models.Model):
+    inv = models.ForeignKey(Inv, related_name='%(class)s', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="%(class)s")
+    weight = models.DecimalField(max_digits=6, decimal_places=2)
+    
+    class Meta:
+        abstract = True
+
+    def __int__(self):
+        return self.id
+    
+class InvControl(Invitem):
+    noteitem = models.ForeignKey(Noteitem, on_delete=models.CASCADE, related_name="%(class)s")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __int__(self):
+        return self.id

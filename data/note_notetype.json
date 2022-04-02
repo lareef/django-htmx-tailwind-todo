@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "notetype": "Purchase Order"
+    },
+    {
+        "id": 2,
+        "notetype": "Sales"
+    },
+    {
+        "id": 3,
+        "notetype": "Customer Order"
+    },
+    {
+        "id": 4,
+        "notetype": "Workshop Order"
+    }
+]

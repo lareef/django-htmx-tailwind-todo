@@ -2,15 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
-from .models import Note, Noteitem, Notekey, Notetype, Status, Noteitemkey, PO, POItem, Product, SO, SOItem, CO, COItem, WO, WOItem
-
-# def notes(request, pk=""):
-#     notetype = Notetype.objects.all()
-#     notes = None
-#     if pk:
-#         notes = Note.objects.filter(notetype=pk)
-#         return render(request, 'note/notes.html', {'notes': notes})
-#     return render(request, 'note/notes.html', {'notes': notes})
+from .models import Note, Noteitem, Notekey, Notetype, Status, Noteitemkey, PO, POItem, Product, SO, SOItem, CO, COItem, WO, WOItem, Inv, InvControl
 
 def notes(request):
     notetypes = Notetype.objects.all()
@@ -118,6 +110,8 @@ def edit_noteitem(request, pk):
         noteitem.weight = request.POST.get('weight', '')
         noteitem.save()
         
+        
+        
         #note = Note.objects.filter(notekey_id=notekey)[:1].get()
 
         return render(request, 'note/partials/noteitem.html', {'noteitem': noteitem})
@@ -139,6 +133,8 @@ def add_noteitem(request, note):
         obj_noteitemkey, create_noteitemkey = Noteitemkey.objects.get_or_create(notekey=obj_notekey)
         if product:
             obj_product = Product.objects.get(product_name=product)
+            #obj_invitem, create_invitem = Invitem.objects.get_or_create(product=obj_product, weight=weight)
+            
             if note.notetype_id == 1:
                 obj_item, create_poitem = POItem.objects.get_or_create(
                     noteitemkey=obj_noteitemkey,
@@ -175,6 +171,10 @@ def add_noteitem(request, note):
                     quantity=quantity,
                     weight=weight,
                     cost=cost)
+
+            obj_invitem, create_invitem = Inv.objects.get_or_create(product=obj_product, weight=weight)   
+            obj_invcontrol = InvControl.objects.get_or_create(inv_id=obj_invitem.id, noteitem=obj_item,
+                                                              product=obj_product, weight=weight)
                                
             #noteitem = Noteitem.objects.get(id=obj_poitem.noteitem_ptr_id)
     

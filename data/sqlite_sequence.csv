@@ -1,0 +1,14 @@
+name,seq
+django_migrations,34
+django_admin_log,10
+django_content_type,36
+auth_permission,144
+auth_group,0
+auth_user,1
+note_product,3
+note_notekey,17
+note_noteitemkey,16
+note_notetype,4
+note_status,3
+note_note,19
+note_noteitem,46

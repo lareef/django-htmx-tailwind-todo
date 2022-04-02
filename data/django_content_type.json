@@ -1,0 +1,177 @@
+[
+    {
+        "app_label": "admin",
+        "id": 1,
+        "model": "logentry"
+    },
+    {
+        "app_label": "auth",
+        "id": 2,
+        "model": "permission"
+    },
+    {
+        "app_label": "auth",
+        "id": 3,
+        "model": "group"
+    },
+    {
+        "app_label": "auth",
+        "id": 4,
+        "model": "user"
+    },
+    {
+        "app_label": "contenttypes",
+        "id": 5,
+        "model": "contenttype"
+    },
+    {
+        "app_label": "sessions",
+        "id": 6,
+        "model": "session"
+    },
+    {
+        "app_label": "todo",
+        "id": 7,
+        "model": "todo"
+    },
+    {
+        "app_label": "todo",
+        "id": 8,
+        "model": "master"
+    },
+    {
+        "app_label": "todo",
+        "id": 9,
+        "model": "doc"
+    },
+    {
+        "app_label": "todo",
+        "id": 10,
+        "model": "product"
+    },
+    {
+        "app_label": "todo",
+        "id": 11,
+        "model": "note"
+    },
+    {
+        "app_label": "todo",
+        "id": 12,
+        "model": "notei"
+    },
+    {
+        "app_label": "todo",
+        "id": 13,
+        "model": "noteitem"
+    },
+    {
+        "app_label": "todo",
+        "id": 14,
+        "model": "ponote"
+    },
+    {
+        "app_label": "todo",
+        "id": 15,
+        "model": "ponoteitem"
+    },
+    {
+        "app_label": "todo",
+        "id": 16,
+        "model": "psnote"
+    },
+    {
+        "app_label": "todo",
+        "id": 17,
+        "model": "psnoteitem"
+    },
+    {
+        "app_label": "note",
+        "id": 18,
+        "model": "client"
+    },
+    {
+        "app_label": "note",
+        "id": 19,
+        "model": "inv"
+    },
+    {
+        "app_label": "note",
+        "id": 20,
+        "model": "note"
+    },
+    {
+        "app_label": "note",
+        "id": 21,
+        "model": "noteitem"
+    },
+    {
+        "app_label": "note",
+        "id": 22,
+        "model": "notekey"
+    },
+    {
+        "app_label": "note",
+        "id": 23,
+        "model": "notetype"
+    },
+    {
+        "app_label": "note",
+        "id": 24,
+        "model": "product"
+    },
+    {
+        "app_label": "note",
+        "id": 25,
+        "model": "status"
+    },
+    {
+        "app_label": "note",
+        "id": 26,
+        "model": "co"
+    },
+    {
+        "app_label": "note",
+        "id": 27,
+        "model": "coitem"
+    },
+    {
+        "app_label": "note",
+        "id": 28,
+        "model": "po"
+    },
+    {
+        "app_label": "note",
+        "id": 29,
+        "model": "poitem"
+    },
+    {
+        "app_label": "note",
+        "id": 30,
+        "model": "so"
+    },
+    {
+        "app_label": "note",
+        "id": 31,
+        "model": "soitem"
+    },
+    {
+        "app_label": "note",
+        "id": 32,
+        "model": "wo"
+    },
+    {
+        "app_label": "note",
+        "id": 33,
+        "model": "woitem"
+    },
+    {
+        "app_label": "note",
+        "id": 34,
+        "model": "noteitemkey"
+    },
+    {
+        "app_label": "note",
+        "id": 35,
+        "model": "invcontrol"
+    }
+]

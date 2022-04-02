@@ -1,0 +1,15 @@
+[
+    {
+        "date_joined": "2022-04-02 15:10:37.513227",
+        "email": "",
+        "first_name": "",
+        "id": 1,
+        "is_active": 1,
+        "is_staff": 1,
+        "is_superuser": 1,
+        "last_login": "2022-04-02 15:12:12.084355",
+        "last_name": "",
+        "password": "pbkdf2_sha256$320000$GQFlqC1Dt7Bhr62gFDEq0I$4ap0AGtBJbzYGCqTnoy6gl9N+qlroLQDt+znJ4OO9wM=",
+        "username": "admin"
+    }
+]
